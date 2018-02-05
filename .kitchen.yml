@@ -21,16 +21,7 @@ platforms:
 suites:
   - name: dnsclient
     run_list:
-      - recipe[segulja_base::default]
-      - role[dnsclients]
-    verifier:
-      inspec_tests:
-        - test/smoke/default
-    attributes:
-  - name: dnsserver
-    run_list:
-      - recipe[segulja_base::default]
-      - role[dnsservers]
+      - recipe[segulja_hostfile::default]
     verifier:
       inspec_tests:
         - test/smoke/default
