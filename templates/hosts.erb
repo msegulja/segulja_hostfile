@@ -1,0 +1,11 @@
+###
+## Chef Managed File
+##
+###
+## This file is managed by Chef and should not be edited directly.  Instead,
+## changes should be made to the template in the segulja_hostfile cookbook.
+##
+###
+
+127.0.0.1       localhost.localdomain       localhost
+<%= node['ipaddress'] %>        <%= node['fqdn'] %> <%= node['hostname'] %>
