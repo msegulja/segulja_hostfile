@@ -8,18 +8,29 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
+  roles_path: ../../chef-config/roles
+  data_bags_path: ../../chef-config/vault-items
 
 verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-16.04
   - name: centos-7
+  - name: bento/oracle-7.3
 
 suites:
-  - name: default
+  - name: dnsclient
     run_list:
-      - recipe[segulja_hostfile::default]
+      - recipe[segulja_base::default]
+      - role[dnsclients]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+  - name: dnsserver
+    run_list:
+      - recipe[segulja_base::default]
+      - role[dnsservers]
     verifier:
       inspec_tests:
         - test/smoke/default
